@@ -53,6 +53,7 @@ PACKAGES="$PACKAGES v2ray-geosite"
 # 基础组件
 PACKAGES="$PACKAGES curl"
 PACKAGES="$PACKAGES nano"
+PACKAGES="$PACKAGES wget"
 PACKAGES="$PACKAGES openssh-sftp-server"
 # IPv6 DHCP 客户端与 LuCI 支持
 PACKAGES="$PACKAGES odhcp6c"
