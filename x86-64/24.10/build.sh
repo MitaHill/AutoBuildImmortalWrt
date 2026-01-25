@@ -65,7 +65,6 @@ PACKAGES="$PACKAGES luci-app-conntrack"
 PACKAGES="$PACKAGES irqbalance ethtool pciutils usbutils"
 
 # --- 网络管理与行为管控 ---
-PACKAGES="$PACKAGES luci-app-eqos"
 PACKAGES="$PACKAGES luci-app-sqm"
 PACKAGES="$PACKAGES luci-app-port-mirror"
 PACKAGES="$PACKAGES luci-app-upnp"
@@ -76,6 +75,7 @@ PACKAGES="$PACKAGES luci-app-ddns luci-app-banip"
 PACKAGES="$PACKAGES luci-app-arpbind"
 
 # --- 深度监控与审计 ---
+PACKAGES="$PACKAGES luci-app-wrtbwmon"
 PACKAGES="$PACKAGES luci-app-netdata"
 PACKAGES="$PACKAGES luci-app-nlbwmon"
 PACKAGES="$PACKAGES luci-app-statistics"
