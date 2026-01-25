@@ -73,6 +73,7 @@ PACKAGES="$PACKAGES luci-app-wol"
 PACKAGES="$PACKAGES luci-app-mwan3"
 PACKAGES="$PACKAGES luci-app-access-control"
 PACKAGES="$PACKAGES luci-app-ddns luci-app-banip"
+PACKAGES="$PACKAGES luci-app-arpbind"
 
 # --- 深度监控与审计 ---
 PACKAGES="$PACKAGES luci-app-netdata"
