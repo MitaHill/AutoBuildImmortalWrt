@@ -45,20 +45,40 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - 开始构建固件..."
 # ============= imm仓库内的插件==============
 # 定义所需安装的包列表 下列插件你都可以自行删减
 PACKAGES=""
+# --- 核心代理 (PassWall & Core) ---
 PACKAGES="$PACKAGES luci-app-passwall"
 PACKAGES="$PACKAGES luci-i18n-passwall-zh-cn"
-PACKAGES="$PACKAGES trojan-plus"
-PACKAGES="$PACKAGES v2ray-geoip"
-PACKAGES="$PACKAGES v2ray-geosite"
-# 基础组件
-PACKAGES="$PACKAGES curl"
-PACKAGES="$PACKAGES nano"
-PACKAGES="$PACKAGES wget"
-PACKAGES="$PACKAGES openssh-sftp-server"
-# IPv6 DHCP 客户端与 LuCI 支持
-PACKAGES="$PACKAGES odhcp6c"
-PACKAGES="$PACKAGES odhcpd-ipv6only"
-PACKAGES="$PACKAGES luci-proto-ipv6"
+PACKAGES="$PACKAGES sing-box xray-core trojan-plus"
+PACKAGES="$PACKAGES v2ray-geoip v2ray-geosite openssl-util"
+
+# --- 基础工具与系统组件 (PVE必备) ---
+PACKAGES="$PACKAGES qemu-ga"
+PACKAGES="$PACKAGES curl wget-ssl nano htop tar unzip"
+PACKAGES="$PACKAGES ca-certificates"
+PACKAGES="$PACKAGES luci-app-ttyd openssh-sftp-server"
+
+# --- 网络管理与行为管控 ---
+PACKAGES="$PACKAGES luci-app-eqos"
+PACKAGES="$PACKAGES luci-app-sqm"
+PACKAGES="$PACKAGES luci-app-port-mirror"
+PACKAGES="$PACKAGES luci-app-upnp"
+PACKAGES="$PACKAGES luci-app-wol"
+PACKAGES="$PACKAGES luci-app-mwan3"
+PACKAGES="$PACKAGES luci-app-access-control"
+
+# --- 深度监控与审计 ---
+PACKAGES="$PACKAGES luci-app-netdata"
+PACKAGES="$PACKAGES luci-app-nlbwmon"
+PACKAGES="$PACKAGES luci-app-statistics"
+PACKAGES="$PACKAGES luci-app-nexttrace"
+PACKAGES="$PACKAGES luci-app-vnstat"
+
+# --- 磁盘管理 ---
+PACKAGES="$PACKAGES luci-app-diskman"
+
+# --- DNS 过滤与 IPv6 支持 ---
+PACKAGES="$PACKAGES odhcp6c odhcpd-ipv6only luci-proto-ipv6"
+PACKAGES="$PACKAGES ip6tables kmod-nft-bridge"
 # ======== shell/custom-packages.sh =======
 # 合并imm仓库以外的第三方插件
 PACKAGES="$PACKAGES $CUSTOM_PACKAGES"
