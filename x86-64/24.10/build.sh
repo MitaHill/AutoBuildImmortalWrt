@@ -43,47 +43,24 @@ fi
 echo "$(date '+%Y-%m-%d %H:%M:%S') - 开始构建固件..."
 
 # ============= imm仓库内的插件==============
-# 定义所需安装的包列表 下列插件你都可以自行删减
+# 定义所需安装的包列表 (旁路代理 + SNMP 跨三层识别版)
 PACKAGES=""
 PACKAGES="$PACKAGES luci-app-passwall"
 PACKAGES="$PACKAGES luci-i18n-passwall-zh-cn"
-PACKAGES="$PACKAGES trojan-plus"
-PACKAGES="$PACKAGES v2ray-geoip"
-PACKAGES="$PACKAGES v2ray-geosite"
+PACKAGES="$PACKAGES sing-box xray-core trojan-plus"
+PACKAGES="$PACKAGES v2ray-geoip v2ray-geosite"
+
+# --- SNMP 服务 (用于爱快跨三层识别) ---
+PACKAGES="$PACKAGES snmpd"
+
 # 基础组件
-PACKAGES="$PACKAGES curl"
-PACKAGES="$PACKAGES nano"
-PACKAGES="$PACKAGES wget"
-PACKAGES="$PACKAGES openssh-sftp-server"
+PACKAGES="$PACKAGES curl nano wget openssh-sftp-server"
 # IPv6 DHCP 客户端与 LuCI 支持
-PACKAGES="$PACKAGES odhcp6c"
-PACKAGES="$PACKAGES odhcpd-ipv6only"
-PACKAGES="$PACKAGES luci-proto-ipv6"
+PACKAGES="$PACKAGES odhcp6c odhcpd-ipv6only luci-proto-ipv6"
+
 # ======== shell/custom-packages.sh =======
 # 合并imm仓库以外的第三方插件
 PACKAGES="$PACKAGES $CUSTOM_PACKAGES"
-
-
-# 判断是否需要编译 Docker 插件
-if [ "$INCLUDE_DOCKER" = "yes" ]; then
-    PACKAGES="$PACKAGES luci-i18n-dockerman-zh-cn"
-    echo "Adding package: luci-i18n-dockerman-zh-cn"
-fi
-
-# 若构建openclash 则添加内核
-if echo "$PACKAGES" | grep -q "luci-app-openclash"; then
-    echo "✅ 已选择 luci-app-openclash，添加 openclash core"
-    mkdir -p files/etc/openclash/core
-    # Download clash_meta
-    META_URL="https://raw.githubusercontent.com/vernesong/OpenClash/core/master/meta/clash-linux-amd64.tar.gz"
-    wget -qO- $META_URL | tar xOvz > files/etc/openclash/core/clash_meta
-    chmod +x files/etc/openclash/core/clash_meta
-    # Download GeoIP and GeoSite
-    wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -O files/etc/openclash/GeoIP.dat
-    wget -q https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -O files/etc/openclash/GeoSite.dat
-else
-    echo "⚪️ 未选择 luci-app-openclash"
-fi
 
 # 构建镜像
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Building image with the following packages:"
