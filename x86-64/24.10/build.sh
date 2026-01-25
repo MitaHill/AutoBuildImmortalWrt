@@ -51,8 +51,7 @@ PACKAGES="$PACKAGES luci-i18n-passwall-zh-cn"
 PACKAGES="$PACKAGES sing-box xray-core trojan-plus"
 PACKAGES="$PACKAGES v2ray-geoip v2ray-geosite openssl-util"
 
-# --- 基础工具与系统组件 (PVE必备) ---
-PACKAGES="$PACKAGES qemu-ga"
+# --- 基础工具与系统组件 (实体机优化) ---
 PACKAGES="$PACKAGES curl wget-ssl nano htop tar unzip"
 PACKAGES="$PACKAGES ca-certificates"
 PACKAGES="$PACKAGES luci-app-ttyd openssh-sftp-server"
@@ -78,23 +77,13 @@ PACKAGES="$PACKAGES luci-app-statistics"
 # --- 磁盘管理 ---
 PACKAGES="$PACKAGES luci-app-diskman"
 
-# --- Docker ---
-PACKAGES="$PACKAGES docker-compose"
-
 # --- IPv6 支持 ---
 PACKAGES="$PACKAGES odhcp6c odhcpd-ipv6only luci-proto-ipv6"
 PACKAGES="$PACKAGES kmod-nft-bridge"
 
 # ======== shell/custom-packages.sh =======
-# 合并imm仓库以外的第三方插件 (Passwall/AdGuardHome)
+# 合并imm仓库以外的第三方插件 (Passwall)
 PACKAGES="$PACKAGES $CUSTOM_PACKAGES"
-
-
-# 判断是否需要编译 Docker 插件
-if [ "$INCLUDE_DOCKER" = "yes" ]; then
-    PACKAGES="$PACKAGES luci-i18n-dockerman-zh-cn"
-    echo "Adding package: luci-i18n-dockerman-zh-cn"
-fi
 
 # ==========================================
 # 🛑 尝试下载第三方实时监控插件 (Wrtbwmon)
