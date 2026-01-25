@@ -65,10 +65,10 @@ PACKAGES="$PACKAGES luci-app-wol"
 PACKAGES="$PACKAGES luci-app-mwan3"
 PACKAGES="$PACKAGES luci-app-ddns"
 
-# --- 流量控制与管理 (QoS & 访问控制) ---
+# --- 流量控制 (QoS) ---
 PACKAGES="$PACKAGES luci-app-sqm"
-PACKAGES="$PACKAGES luci-app-access-control"
-PACKAGES="$PACKAGES luci-app-banip"
+# PACKAGES="$PACKAGES luci-app-access-control"
+# PACKAGES="$PACKAGES luci-app-banip"
 
 # --- 监控与统计 (官方源稳定包) ---
 PACKAGES="$PACKAGES luci-app-netdata"
@@ -98,12 +98,12 @@ fi
 
 # ==========================================
 # 🛑 尝试下载第三方实时监控插件 (Wrtbwmon)
-# 不放入 PACKAGES 变量以防止缺失导致整个构建失败
+# 暂时注释以确保构建成功 (Fix Build Failure)
 # ==========================================
-echo "⬇️ Attempting to pre-download wrtbwmon..."
-mkdir -p /home/build/immortalwrt/packages
-wget -P /home/build/immortalwrt/packages/ https://github.com/brvphoenix/wrtbwmon/releases/download/v1.5.2/wrtbwmon_1.5.2_all.ipk || echo "wrtbwmon skip"
-wget -P /home/build/immortalwrt/packages/ https://github.com/brvphoenix/luci-app-wrtbwmon/releases/download/release-v2.0.10/luci-app-wrtbwmon_2.0.10_all.ipk || echo "luci-app-wrtbwmon skip"
+# echo "⬇️ Attempting to pre-download wrtbwmon..."
+# mkdir -p /home/build/immortalwrt/packages
+# wget -P /home/build/immortalwrt/packages/ https://github.com/brvphoenix/wrtbwmon/releases/download/v1.5.2/wrtbwmon_1.5.2_all.ipk || echo "wrtbwmon skip"
+# wget -P /home/build/immortalwrt/packages/ https://github.com/brvphoenix/luci-app-wrtbwmon/releases/download/release-v2.0.10/luci-app-wrtbwmon_2.0.10_all.ipk || echo "luci-app-wrtbwmon skip"
 # ==========================================
 
 # 若构建openclash 则添加内核
