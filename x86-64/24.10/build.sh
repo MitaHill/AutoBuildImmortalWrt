@@ -57,23 +57,18 @@ PACKAGES="$PACKAGES curl wget-ssl nano htop tar unzip"
 PACKAGES="$PACKAGES ca-certificates"
 PACKAGES="$PACKAGES luci-app-ttyd openssh-sftp-server"
 
-# --- 高级诊断与实时监控 ---
-PACKAGES="$PACKAGES iftop tcpdump bind-dig mtr"
-PACKAGES="$PACKAGES luci-app-conntrack"
-
-# --- PVE 性能优化与硬件工具 ---
-PACKAGES="$PACKAGES irqbalance ethtool pciutils usbutils"
-
-# --- 网络管理与行为管控 ---
-PACKAGES="$PACKAGES luci-app-sqm"
+# --- 核心网络与诊断 ---
+PACKAGES="$PACKAGES bind-dig"
+PACKAGES="$PACKAGES iftop"
 PACKAGES="$PACKAGES luci-app-upnp"
 PACKAGES="$PACKAGES luci-app-wol"
 PACKAGES="$PACKAGES luci-app-mwan3"
-PACKAGES="$PACKAGES luci-app-ddns luci-app-banip"
-PACKAGES="$PACKAGES luci-app-arpbind"
+PACKAGES="$PACKAGES luci-app-ddns"
 
-# --- 深度监控与审计 ---
-PACKAGES="$PACKAGES luci-app-wrtbwmon"
+# --- 流量控制 (QoS) ---
+PACKAGES="$PACKAGES luci-app-sqm"
+
+# --- 监控与统计 (官方源稳定包) ---
 PACKAGES="$PACKAGES luci-app-netdata"
 PACKAGES="$PACKAGES luci-app-nlbwmon"
 PACKAGES="$PACKAGES luci-app-statistics"
@@ -81,14 +76,15 @@ PACKAGES="$PACKAGES luci-app-statistics"
 # --- 磁盘管理 ---
 PACKAGES="$PACKAGES luci-app-diskman"
 
-# --- Docker 增强 ---
+# --- Docker ---
 PACKAGES="$PACKAGES docker-compose"
 
-# --- DNS 过滤与 IPv6 支持 ---
+# --- IPv6 支持 ---
 PACKAGES="$PACKAGES odhcp6c odhcpd-ipv6only luci-proto-ipv6"
 PACKAGES="$PACKAGES kmod-nft-bridge"
+
 # ======== shell/custom-packages.sh =======
-# 合并imm仓库以外的第三方插件
+# 合并imm仓库以外的第三方插件 (Passwall/AdGuardHome)
 PACKAGES="$PACKAGES $CUSTOM_PACKAGES"
 
 
@@ -98,21 +94,7 @@ if [ "$INCLUDE_DOCKER" = "yes" ]; then
     echo "Adding package: luci-i18n-dockerman-zh-cn"
 fi
 
-# ==========================================
-# 🛑 手动补全缺失的第三方插件 (Fix Build Errors)
-# ==========================================
-echo "⬇️ Downloading missing third-party packages..."
-mkdir -p /home/build/immortalwrt/packages
-
-# 1. wrtbwmon (实时流量监控)
-echo "Downloading wrtbwmon..."
-wget -P /home/build/immortalwrt/packages/ https://github.com/brvphoenix/wrtbwmon/releases/download/v1.5.2/wrtbwmon_1.5.2_all.ipk
-wget -P /home/build/immortalwrt/packages/ https://github.com/brvphoenix/luci-app-wrtbwmon/releases/download/release-v2.0.10/luci-app-wrtbwmon_2.0.10_all.ipk
-
-# 2. NextTrace (可视路由追踪) - 尝试下载，如果失败则忽略
-# wget -P /home/build/immortalwrt/packages/ https://github.com/NateScarlet/luci-app-nexttrace/releases/download/v1.0.0/luci-app-nexttrace_1.0.0_all.ipk || echo "NextTrace download failed, skipping..."
-
-# ==========================================
+# 若构建openclash 则添加内核
 
 # 若构建openclash 则添加内核
 if echo "$PACKAGES" | grep -q "luci-app-openclash"; then
