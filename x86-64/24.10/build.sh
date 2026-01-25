@@ -57,6 +57,13 @@ PACKAGES="$PACKAGES curl wget-ssl nano htop tar unzip"
 PACKAGES="$PACKAGES ca-certificates"
 PACKAGES="$PACKAGES luci-app-ttyd openssh-sftp-server"
 
+# --- 高级诊断与实时监控 ---
+PACKAGES="$PACKAGES iftop tcpdump bind-dig mtr"
+PACKAGES="$PACKAGES luci-app-conntrack"
+
+# --- PVE 性能优化与硬件工具 ---
+PACKAGES="$PACKAGES irqbalance ethtool pciutils usbutils"
+
 # --- 网络管理与行为管控 ---
 PACKAGES="$PACKAGES luci-app-eqos"
 PACKAGES="$PACKAGES luci-app-sqm"
@@ -65,6 +72,7 @@ PACKAGES="$PACKAGES luci-app-upnp"
 PACKAGES="$PACKAGES luci-app-wol"
 PACKAGES="$PACKAGES luci-app-mwan3"
 PACKAGES="$PACKAGES luci-app-access-control"
+PACKAGES="$PACKAGES luci-app-ddns luci-app-banip"
 
 # --- 深度监控与审计 ---
 PACKAGES="$PACKAGES luci-app-netdata"
@@ -75,6 +83,9 @@ PACKAGES="$PACKAGES luci-app-vnstat"
 
 # --- 磁盘管理 ---
 PACKAGES="$PACKAGES luci-app-diskman"
+
+# --- Docker 增强 ---
+PACKAGES="$PACKAGES docker-compose"
 
 # --- DNS 过滤与 IPv6 支持 ---
 PACKAGES="$PACKAGES odhcp6c odhcpd-ipv6only luci-proto-ipv6"
