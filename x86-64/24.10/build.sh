@@ -48,6 +48,7 @@ PACKAGES=""
 PACKAGES="$PACKAGES luci-app-passwall"
 PACKAGES="$PACKAGES luci-i18n-passwall-zh-cn"
 PACKAGES="$PACKAGES trojan-plus"
+PACKAGES="$PACKAGES sing-box xray-core"
 PACKAGES="$PACKAGES v2ray-geoip"
 PACKAGES="$PACKAGES v2ray-geosite"
 # 基础组件
